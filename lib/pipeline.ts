@@ -9,7 +9,7 @@ export class AirConditioningCdkStack extends cdk.Stack {
     const pipeline = new CodePipeline(this, 'CodePipeline', {
       pipelineName: 'ACRegistryPipeline',
       synth: new ShellStep('Synth', {
-        input: CodePipelineSource.gitHub('marchese29/TODO', 'master'),
+        input: CodePipelineSource.gitHub('marchese29/AirConditioningCDK', 'main'),
         commands: ['npm ci', 'npm run build', 'npx cdk synth']
       })
     });

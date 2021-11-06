@@ -17,7 +17,8 @@ export class AirConditioningInfrastructureStack extends cdk.Stack {
 
         this.usersTable = new ddb.Table(this, 'UsersTable', {
             tableName: `${props.env?.region}-users-v01`,
-            billingMode: ddb.BillingMode.PAY_PER_REQUEST,
+            writeCapacity: 1,
+            readCapacity: 1,
             partitionKey: {
                 name: 'user_key',
                 type: ddb.AttributeType.STRING
@@ -26,7 +27,8 @@ export class AirConditioningInfrastructureStack extends cdk.Stack {
 
         this.actionsTable = new ddb.Table(this, 'ActionsTable', {
             tableName: `${props.env?.region}-actions-v01`,
-            billingMode: ddb.BillingMode.PAY_PER_REQUEST,
+            writeCapacity: 1,
+            readCapacity: 1,
             partitionKey: {
                 name: 'action_id',
                 type: ddb.AttributeType.STRING
@@ -34,6 +36,8 @@ export class AirConditioningInfrastructureStack extends cdk.Stack {
         });
         this.actionsTable.addGlobalSecondaryIndex({
             indexName: `${this.actionsByUserIndex}`,
+            writeCapacity: 1,
+            readCapacity: 1,
             partitionKey: {
                 name: 'user_key',
                 type: ddb.AttributeType.STRING
@@ -42,7 +46,8 @@ export class AirConditioningInfrastructureStack extends cdk.Stack {
 
         this.conditionsTable = new ddb.Table(this, 'ConditionsTable', {
             tableName: `${props.env?.region}-conditions-v01`,
-            billingMode: ddb.BillingMode.PAY_PER_REQUEST,
+            writeCapacity: 1,
+            readCapacity: 1,
             partitionKey: {
                 name: 'condition_id',
                 type: ddb.AttributeType.STRING
@@ -51,6 +56,8 @@ export class AirConditioningInfrastructureStack extends cdk.Stack {
         });
         this.conditionsTable.addGlobalSecondaryIndex({
             indexName: `${this.conditionsByUserIndex}`,
+            writeCapacity: 1,
+            readCapacity: 1,
             partitionKey: {
                 name: 'user_key',
                 type: ddb.AttributeType.STRING
@@ -59,7 +66,8 @@ export class AirConditioningInfrastructureStack extends cdk.Stack {
 
         this.triggersTable = new ddb.Table(this, 'TriggersTable', {
             tableName: `${props.env?.region}-triggers-v01`,
-            billingMode: ddb.BillingMode.PAY_PER_REQUEST,
+            writeCapacity: 1,
+            readCapacity: 1,
             partitionKey: {
                 name: 'trigger_id',
                 type: ddb.AttributeType.STRING
